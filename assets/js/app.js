@@ -15,17 +15,27 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // allows users to add new sections to the resume
-  let sectionsAdded = 0;
+  let addedSections = [];
+  let hrs = [];
   document.getElementById('addSection').addEventListener('click', function() {
-    if (sectionsAdded < 3) {
+    if (addedSections.length < 3) {
       const hr = document.createElement('hr');
-      const newSection = section.cloneNode(true);
-      newSection.classList.remove('section');
+      const clone = section.cloneNode(true);
+      clone.classList.remove('section');
       
       page.append(hr);
-      page.append(newSection);
+      page.append(clone);
       
-      sectionsAdded++;
+      addedSections.push(clone);
+      hrs.push(hr);
+    }
+  });
+
+  // allows users to remove added sections
+  document.getElementById('removeSection').addEventListener('click', function() {
+    if (addedSections.length > 0) {
+      addedSections.pop().remove();
+      hrs.pop().remove();
     }
   });
   
